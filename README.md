@@ -1,4 +1,10 @@
 ## What is MeteorQuest?
+MeteorQuest is a prototype of a location-based mobile social game, where the players are guided to a real-world location to find and destroy a meteor. As the players are guided to the meteor, they are faced with three minigames that they must complete as illustrated in the following figure:
+
+![alt text](gameconcept.png "Illustration of game concept")
+
+The game is developed as a four-player experience, and the purpose of open-sourcing it is to provide researchers and game developers with a platform that makes it easy to create a real-world game event. As it is right now, we have developed three minigames that can be part of the overall game experience, and we have made sure it’s easy for you to develop your own minigames and incorporate them in the game. In between the different mini-games, the players must work together to navigate. For that the players are divided into two roles: Communicators and navigators. The communicators are responsible for passing vital information in relation to the game to the other players. Several times during the game experience, the communicators will receive a call with information about the current stage of the game. This information ideally must be passed on to the other players. The navigators, on the other hand, are the only ones with access to the navigation methods called: Screen brightness and flashlight frequency. The screen brightness navigation method utilizes the brightness and color of the smartphone screen to tell the player, if they are getting closer or further away from the target, as seen in the next figure – green signals approaching the target, while red indicates moving away from the target. Flashlight frequency works similar to screen brightness, where the flashlight of the phone will turn on and off with different frequencies, depending on the players distance to the target - the closer they get, the faster it will blink.  
+
 
 
 ## Getting Started
