@@ -24,7 +24,7 @@ Setting everything up and creating a game event can be divided into five steps. 
     a.	Install application on four devices
 2.	Plot in coordinates in real-time database using the console in Google Firebase
 3.	Start the game approximately 300 meters from the target
-4.	When you start the application on the phones, the first screen will prompt you to type in the different player roles. Make sure to assign the roles 1-4 to the different players as illustrated in figure 3.
+4.	When you start the application on the phones, the first screen will prompt you to type in the different player roles. Make sure to assign the roles 1-4 to the different players.
 5.	Then you’re done with the setup and you can start the game. 
 
 ```
