@@ -25,17 +25,17 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    public void liftMeteor(View v){
+/*    public void liftMeteor(View v){
         Intent intent = new Intent(GameScreen.this, LiftMeteor.class);
         startActivity(intent);
-    }
+    }*/
 
     public void chargeBattery(View v){
         Intent intent = new Intent(GameScreen.this, ChargeTheBattery.class);
         startActivity(intent);
     }
 
-    public void swordFight(View v){
+/*    public void swordFight(View v){
         Intent intent = new Intent(GameScreen.this, SwordFight.class);
         startActivity(intent);
     }
@@ -54,14 +54,14 @@ public class GameScreen extends AppCompatActivity {
     public void bombSquad(View v) {
         Intent intent = new Intent(GameScreen.this, BombSquad.class);
         startActivity(intent);
-    }
+    }*/
 
     public void shuffleGame(View v){
         Intent intent = new Intent(GameScreen.this, MeteorQuest.class);
         startActivity(intent);
     }
 
-    public void blowMic(View v){
+/*    public void blowMic(View v){
         Intent intent = new Intent(GameScreen.this, BlowMic.class);
         startActivity(intent);
     }
@@ -74,7 +74,7 @@ public class GameScreen extends AppCompatActivity {
     public void drinkingGame(View v){
         Intent intent = new Intent(GameScreen.this, MiniGameDrink.class);
         startActivity(intent);
-    }
+    }*/
 
     public void fullscreen(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);

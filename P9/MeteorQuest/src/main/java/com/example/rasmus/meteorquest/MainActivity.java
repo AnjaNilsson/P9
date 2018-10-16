@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rasmus.meteorquest.Minigames.Minigame;
 import com.example.rasmus.meteorquest.NavigationMethod.Flashlight;
 import com.example.rasmus.meteorquest.Other.GeofenceTransitionService;
 import com.google.android.gms.common.ConnectionResult;
@@ -741,7 +742,8 @@ public class MainActivity extends AppCompatActivity
                                 Toast toast = Toast.makeText(getApplicationContext(), "mini game started", Toast.LENGTH_SHORT);
                                 toast.show();
 
-                                Intent intent = new Intent(MainActivity.this, MiniGameDrink.class);
+                                /*Intent intent = new Intent(MainActivity.this, MiniGameDrink.class); -- old code*/
+                                Intent intent = new Intent(MainActivity.this, Minigame.class);
                                 startActivity(intent);
                             }
                         }
