@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:141210423875:android:78f661730be37401",
+        "mobilesdk_app_id": "1:141210423875:android:6711fbfaf1a34bd4",
         "android_client_info": {
-          "package_name": "com.example.rasmus.meteorquest"
+          "package_name": "com.example.anja.meteorquest"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "141210423875-abae244q3g9e7asddt2r0g8isejk99nu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anja.meteorquest",
+            "certificate_hash": "e2e52d572b52fecce2169dcd1525ba44c8f1dc9a"
+          }
+        },
         {
           "client_id": "141210423875-quiavi3b1el7vbkq9t1tqmkhn2cqb1me.apps.googleusercontent.com",
           "client_type": 3
@@ -29,8 +37,57 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141210423875-quiavi3b1el7vbkq9t1tqmkhn2cqb1me.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141210423875:android:78f661730be37401",
+        "android_client_info": {
+          "package_name": "com.example.rasmus.meteorquest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141210423875-5mklas7feb6imf3m41sgdr64k3h8k62v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rasmus.meteorquest",
+            "certificate_hash": "e2e52d572b52fecce2169dcd1525ba44c8f1dc9a"
+          }
+        },
+        {
+          "client_id": "141210423875-quiavi3b1el7vbkq9t1tqmkhn2cqb1me.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMxDTybDkaKSbz127IFJoPB08FQ96idro"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141210423875-quiavi3b1el7vbkq9t1tqmkhn2cqb1me.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

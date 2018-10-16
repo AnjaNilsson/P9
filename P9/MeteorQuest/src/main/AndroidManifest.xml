@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rasmus.meteorquest">
+    package="com.example.anja.meteorquest">
 
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -30,7 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.rasmus.meteorquest.PlayerRole"
+            android:name="com.example.anja.meteorquest.PlayerRole"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,21 +39,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.rasmus.meteorquest.MainActivity"
+            android:name="com.example.anja.meteorquest.MainActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name="com.example.rasmus.meteorquest.Other.GeofenceTransitionService" />
-        <service android:name="com.example.rasmus.meteorquest.Other.Accelerometer" />
-        <service android:name="com.example.rasmus.meteorquest.NavigationMethod.Flashlight" />
+        <service android:name="com.example.anja.meteorquest.Other.GeofenceTransitionService" />
+        <service android:name="com.example.anja.meteorquest.Other.Accelerometer" />
+        <service android:name="com.example.anja.meteorquest.NavigationMethod.Flashlight" />
 
         <activity
-            android:name="com.example.rasmus.meteorquest.Minigames.ChargeTheBattery"
+            android:name="com.example.anja.meteorquest.Minigames.ChargeTheBattery"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.rasmus.meteorquest.Other.Countdown"
+            android:name="com.example.anja.meteorquest.Other.Countdown"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.rasmus.meteorquest.Other.NFC"
+            android:name="com.example.anja.meteorquest.Other.NFC"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -64,24 +64,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.rasmus.meteorquest.Minigames.MeteorQuest"
+            android:name="com.example.anja.meteorquest.Minigames.MeteorQuest"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.rasmus.meteorquest.Other.GameScreen"
+            android:name="com.example.anja.meteorquest.Other.GameScreen"
             android:screenOrientation="portrait" />
-        <activity android:name="com.example.rasmus.meteorquest.Other.Victory" />
-        <activity android:name="com.example.rasmus.meteorquest.NavigationMethod.NavigationActivity" />
+        <activity android:name="com.example.anja.meteorquest.Other.Victory" />
+        <activity android:name="com.example.anja.meteorquest.NavigationMethod.NavigationActivity" />
 
         <service
-            android:name="com.example.rasmus.meteorquest.NavigationMethod.UserLocation"
+            android:name="com.example.anja.meteorquest.NavigationMethod.UserLocation"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.example.rasmus.meteorquest.Other.GameIntro" />
-        <activity android:name="com.example.rasmus.meteorquest.Minigames.PuzzleQuest" />
-        <activity android:name="com.example.rasmus.meteorquest.Other.Introduction" />
-        <activity android:name="com.example.rasmus.meteorquest.Other.Ready2StartGame" />
-        <activity android:name="com.example.rasmus.meteorquest.Other.GameCompleted"></activity>
+        <activity android:name="com.example.anja.meteorquest.Other.GameIntro" />
+        <activity android:name="com.example.anja.meteorquest.Minigames.PuzzleQuest" />
+        <activity android:name="com.example.anja.meteorquest.Other.Introduction" />
+        <activity android:name="com.example.anja.meteorquest.Other.Ready2StartGame" />
+        <activity android:name="com.example.anja.meteorquest.Other.GameCompleted"></activity>
     </application>
 
 </manifest>

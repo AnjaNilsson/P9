@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/holo_green_light"
-    tools:context="com.example.rasmus.meteorquest.MainActivity">
+    tools:context="com.example.anja.meteorquest.MainActivity">
 
     <!-- Line with Latitude and Longitude -->
     <LinearLayout
