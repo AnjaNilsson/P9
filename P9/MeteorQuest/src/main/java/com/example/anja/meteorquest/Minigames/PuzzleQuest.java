@@ -62,7 +62,7 @@ public class PuzzleQuest extends AppCompatActivity implements SensorEventListene
         callButton = (ImageButton)findViewById(R.id.callButton);
         background = (LinearLayout) findViewById(R.id.background);
 
-        txtView.setText("Placer telefonen på et metal objekt");
+        txtView.setText("Place the phone on a metal object");
         callButton.setVisibility(View.INVISIBLE);
 
         SharedPreferences shared = getSharedPreferences("your_file_name", MODE_PRIVATE);
@@ -188,7 +188,7 @@ public class PuzzleQuest extends AppCompatActivity implements SensorEventListene
             //value.setText(DECIMAL_FORMATTER.format(magnitude) + " \u00B5Tesla");
 
             if(magnitude > 90){
-                txtView.setText("Accepter opkaldet");
+                txtView.setText("Accept the call");
                 callButton.setVisibility(View.VISIBLE);
                 if(playerRole.equals("1")){
                     //set data source to mediaplayer
@@ -261,7 +261,7 @@ public class PuzzleQuest extends AppCompatActivity implements SensorEventListene
                 calling = false;
                 talking = false;
                 background.setBackgroundColor(Color.WHITE);
-                txtView.setText("Placer telefonen på et metal objekt");
+                txtView.setText("Place the phone on a metal object");
 
             }
 

@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "141210423875-g44lbg0liog3kgosqgse4kai1o809h28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anja.meteorquest",
+            "certificate_hash": "d169e0b3c369e4f166e0cc310f7ce05c2e3ce728"
+          }
+        },
+        {
           "client_id": "141210423875-quiavi3b1el7vbkq9t1tqmkhn2cqb1me.apps.googleusercontent.com",
           "client_type": 3
         }

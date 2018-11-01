@@ -9,9 +9,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiller:"
         android:layout_gravity="center"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="200dp"
+        android:text="Player no.:" />
 
     <EditText
         android:id="@+id/playerRole"
@@ -26,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Tilføj spiller"
         android:onClick="addPlayer"
-        />
+        android:text="Add Player" />
 </LinearLayout>

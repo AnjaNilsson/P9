@@ -111,12 +111,12 @@ public class NavigationActivity extends AppCompatActivity {
 
         if(playerRole.equals("1") || playerRole.equals("4")){
             background.setBackgroundColor(Color.BLACK);
-            text.setText("Vent på opkald fra guiden");
+            text.setText("Wait for the call with your instructions");
             text.setTextColor(Color.WHITE);
         }
 
         else{
-            text.setText("Vend telefonen rundt og start navigationen");
+            text.setText("Turn the phone around to start the navigation");
         }
 
 

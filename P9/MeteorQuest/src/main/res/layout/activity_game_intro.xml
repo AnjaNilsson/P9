@@ -35,9 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="175dp"
-        android:text="Start mini-spil"
         android:onClick="startGame"
 
-         />
+        android:text="Start Mini-Game" />
 
 </RelativeLayout>

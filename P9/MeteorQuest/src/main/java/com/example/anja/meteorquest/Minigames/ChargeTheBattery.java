@@ -168,8 +168,8 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
                             //middleImage.setImageResource(R.drawable.battery11);
-                            txt1.setText("RYST!");
-                            txt2.setText("RYST!");
+                            txt1.setText("SHAKE!");
+                            txt2.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
@@ -205,8 +205,8 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
                             //middleImage.setImageResource(R.drawable.battery11);
-                            txt1.setText("RYST!");
-                            txt2.setText("RYST!");
+                            txt1.setText("SHAKE!");
+                            txt2.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
