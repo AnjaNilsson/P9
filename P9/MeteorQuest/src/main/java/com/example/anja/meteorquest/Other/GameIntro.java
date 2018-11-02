@@ -97,12 +97,12 @@ public class GameIntro extends AppCompatActivity {
 
     public void callCommunicators(){
         if(playerRole .equals("1") || playerRole .equals("4")) {
-            txtView.setText("Accepter opkaldet");
+            txtView.setText("Accept the call");
             mediaPlayer = MediaPlayer.create(this, R.raw.ringtone);
             mediaPlayer.start();
         }
         else {
-            txtView.setText("Vent på, at kommunikatørerne er færdige med deres opkald.");
+            txtView.setText("Wait for the communicators to finish their calls");
             acceptCall.setVisibility(View.INVISIBLE);
         }
     }
@@ -170,7 +170,7 @@ public class GameIntro extends AppCompatActivity {
                 background.setBackgroundColor(Color.WHITE);
                 acceptCall.setVisibility(View.VISIBLE);
                 txtView.setVisibility(View.VISIBLE);
-                txtView.setText("Afspil igen");
+                txtView.setText("Play again");
                 acceptCall.setBackgroundResource(R.drawable.play);
             }
 

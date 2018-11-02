@@ -95,7 +95,7 @@ public class Introduction extends AppCompatActivity {
            public void onCompletion(MediaPlayer mp) {
                counter ++;
                if(counter >= 2 && playerRoleReady == true){
-                   txtView.setText("Tryk på skærmen og start spillet");
+                   txtView.setText("Touch the screen to start the game");
                    proceedToNav.setVisibility(View.GONE);
                    background.setOnClickListener(new View.OnClickListener()
                    {
@@ -127,7 +127,7 @@ public class Introduction extends AppCompatActivity {
     }
 
     public void navigatorRole(){
-        txtView.setText("Vent på, at kommunikatørerne er færdige med deres opkald");
+        txtView.setText("Wait for the communicators to finish their calls");
         proceedToNav.setVisibility(View.GONE);
         background.setOnClickListener(new View.OnClickListener()
         {
@@ -165,7 +165,7 @@ public class Introduction extends AppCompatActivity {
             playAgain.setClickable(false);
             playAgain.setVisibility(View.GONE);
             proceedToNav.setVisibility(View.GONE);
-            txtView.setText("Hør beskeden igen eller gå til næste opkald");
+            txtView.setText("Click to hear the message again or go to the next call");
        }
        else{
            background.setBackgroundColor(Color.BLACK);
@@ -242,7 +242,7 @@ public class Introduction extends AppCompatActivity {
         }
 
         if(calling != true) {
-            txtView.setText("Accepter opkaldet");
+            txtView.setText("Accept the call");
             mediaPlayer = MediaPlayer.create(this, R.raw.ringtone);
             mediaPlayer.start();
             calling = true;
@@ -262,7 +262,7 @@ public class Introduction extends AppCompatActivity {
             mediaPlayer.reset();
             mediaPlayer.release();
             mediaPlayer = new MediaPlayer();
-            txtView.setText("Accepter opkaldet");
+            txtView.setText("Accept the call");
             mediaPlayer = MediaPlayer.create(this, R.raw.ringtone);
             mediaPlayer.start();
             calling = true;
