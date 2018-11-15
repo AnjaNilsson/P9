@@ -86,12 +86,12 @@ public class MeteorQuest extends AppCompatActivity implements SensorEventListene
         arrayImagePlayer1[1] = R.drawable.player1_2; arrayImagePlayer2[1] = R.drawable.player2_3; arrayImagePlayer3[1] = R.drawable.player3_8; arrayImagePlayer4[1] = R.drawable.player4_5;
         arrayImagePlayer1[2] = R.drawable.player1_3; arrayImagePlayer2[2] = R.drawable.player2_5; arrayImagePlayer3[2] = R.drawable.player3_2; arrayImagePlayer4[2] = R.drawable.player4_2;
         arrayImagePlayer1[3] = R.drawable.player1_5; arrayImagePlayer2[3] = R.drawable.player2_2; arrayImagePlayer3[3] = R.drawable.player3_5; arrayImagePlayer4[3] = R.drawable.player4_8;
-        arrayImagePlayer1[4] = R.drawable.player1_8; arrayImagePlayer2[4] = R.drawable.player2_8; arrayImagePlayer3[4] = R.drawable.player3_3; arrayImagePlayer4[4] = R.drawable.player4_3;
+        arrayImagePlayer1[4] = R.drawable.player1_8; arrayImagePlayer2[4] = R.drawable.player2_8; arrayImagePlayer3[4] = R.drawable.player3_3; arrayImagePlayer4[4] = R.drawable.player3_4;
 
         arrayImagePlayer1Blur[1] = R.drawable.player1_2_blur; arrayImagePlayer2Blur[1] = R.drawable.player2_3_blur; arrayImagePlayer3Blur[1] = R.drawable.player3_8_blur; arrayImagePlayer4Blur[1] = R.drawable.player4_5_blur;
         arrayImagePlayer1Blur[2] = R.drawable.player1_3_blur; arrayImagePlayer2Blur[2] = R.drawable.player2_5_blur; arrayImagePlayer3Blur[2] = R.drawable.player3_2_blur; arrayImagePlayer4Blur[2] = R.drawable.player4_2_blur;
         arrayImagePlayer1Blur[3] = R.drawable.player1_5_blur; arrayImagePlayer2Blur[3] = R.drawable.player2_2_blur; arrayImagePlayer3Blur[3] = R.drawable.player3_5_blur; arrayImagePlayer4Blur[3] = R.drawable.player4_8_blur;
-        arrayImagePlayer1Blur[4] = R.drawable.player1_8_blur; arrayImagePlayer2Blur[4] = R.drawable.player2_8_blur; arrayImagePlayer3Blur[4] = R.drawable.player3_3_blur; arrayImagePlayer4Blur[4] = R.drawable.player4_3_blur;
+        arrayImagePlayer1Blur[4] = R.drawable.player1_8_blur; arrayImagePlayer2Blur[4] = R.drawable.player2_8_blur; arrayImagePlayer3Blur[4] = R.drawable.player3_3_blur; arrayImagePlayer4Blur[4] = R.drawable.player3_4_blur;
 
 
         SharedPreferences shared = getSharedPreferences("your_file_name", MODE_PRIVATE);
