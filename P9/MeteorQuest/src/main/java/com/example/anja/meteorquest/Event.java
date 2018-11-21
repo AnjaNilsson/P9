@@ -1,8 +1,5 @@
 package com.example.anja.meteorquest;
 
-/**
- * Created by rasmu on 09-02-2018.
- */
 
 public class Event {
 

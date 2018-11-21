@@ -3,9 +3,6 @@ package com.example.anja.meteorquest.Minigames;
 import android.app.Activity;
 import android.content.Intent;
 
-/**
- * Created by rasmu on 12-02-2018.
- */
 
 public class Minigame {
     /*
