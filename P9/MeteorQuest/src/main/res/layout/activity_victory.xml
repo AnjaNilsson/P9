@@ -11,13 +11,13 @@
         android:id="@+id/imageView"
         android:layout_width="387dp"
         android:layout_height="491dp"
-        app:srcCompat="@drawable/victory"
+        android:layout_marginTop="-4dp"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="-4dp"
-        app:layout_constraintHorizontal_bias="0.333"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/completed" />
 
     <Button
         android:id="@+id/button3"
