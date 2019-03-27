@@ -57,7 +57,7 @@ public class Accelerometer extends IntentService implements SensorEventListener 
 
     }
 
-    /*@Override
+/*    @Override
     protected void onResume() {
         super.onResume();
         smAccelerometer.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -65,7 +65,7 @@ public class Accelerometer extends IntentService implements SensorEventListener 
     @Override
     protected void onPause() {
         super.onPause();
-        //smAccelerometer.unregisterListener(this);
+        smAccelerometer.unregisterListener(this);
     } */
 
 

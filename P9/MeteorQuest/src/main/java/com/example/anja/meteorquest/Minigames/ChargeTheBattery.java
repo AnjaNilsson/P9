@@ -9,9 +9,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
-
 import android.os.Handler;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -22,7 +20,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.anja.meteorquest.NavigationMethod.Navigation;
 import com.example.anja.meteorquest.NavigationMethod.NavigationActivity;
 import com.example.anja.meteorquest.Other.Database;
@@ -35,20 +32,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ChargeTheBattery extends AppCompatActivity implements SensorEventListener {
-
     public Sensor mySensor;
     public SensorManager SM;
+
     ImageButton button1;
     ImageButton button2;
+    ImageButton button3;
+
     Boolean player1Ready = false;
     Boolean player2Ready = false;
+    Boolean player3Ready = false;
+
+    String gameState;
     int counter = 0;
     int imageCounter = 0;
     ImageView middleImage;
     MediaPlayer mediaPlayer, mediaDrainBattery;
-    TextView txt1, txt2;
+    TextView txt1, txt2, txt3;
     public Handler handler = new Handler();
-    public int delay = 1000; //milliseconds
+    public int delay = 500; //milliseconds
     int oldNumber = 0;
     public boolean chargingSound = false;
     int length = 0;
@@ -67,12 +69,12 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-        //fullscreen();
-        setContentView(R.layout.activity_shake_hands);
+        setContentView(R.layout.activity_charge_battery);
 
         rootReference = Database.getDatabaseRootReference();
         DatabaseReference chargethebatteryReference = rootReference.child("chargethebattery");
         chargethebatteryReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -114,38 +116,14 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
 
         CharSequence colors[] = new CharSequence[] {"1", "2"};
 
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("How many players?");
-        builder.setItems(colors, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // the user clicked on colors[which]
-                if(which == 0){
-                    //1 player
-                    Intent intent = new Intent(ChargeTheBattery.this, ShakeHands1Player.class);
-                    startActivity(intent);
-                }
-                if (which == 1){
-                    // 2 player
-                }
-            }
-        });
-        builder.show(); */
-
         button1 = (ImageButton)findViewById(R.id.button1);
         button2 = (ImageButton)findViewById(R.id.button2);
+        button3 = (ImageButton)findViewById(R.id.button3);
         txt1 = (TextView) findViewById(R.id.txt1);
         txt2 = (TextView) findViewById(R.id.txt2);
-
-       /* txt1.setText("Place thumb on marker");
-        txt2.setText("Place thumb on marker");*/
-
+        txt3 = (TextView) findViewById(R.id.txt3);
         middleImage = (ImageView) findViewById(R.id.animationDown);
-
         mediaPlayer = MediaPlayer.create(this, R.raw.power_up);
-
-
-
         // Create sensor manager
         SM = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -163,30 +141,30 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                     case MotionEvent.ACTION_DOWN:
                         player1Ready = true;
                         actionUp = false;
-                        button1.setBackgroundResource(R.drawable.greenthumb);
-                        if (player1Ready == true && player2Ready == true){
+                        button1.setBackgroundResource(R.drawable.greenthumb3);
+                        if (player1Ready == true && player2Ready == true && player3Ready == true){
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
-                            //middleImage.setImageResource(R.drawable.battery11);
                             txt1.setText("SHAKE!");
                             txt2.setText("SHAKE!");
+                            txt3.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
                         // End
-                        SM.unregisterListener(ChargeTheBattery.this);
+                        //SM.unregisterListener(ChargeTheBattery.this);
                         if(stopHandler == false) {
                             mediaPlayer.pause();
                         }
                         actionUp = true;
                         actionUp();
-                        //counter = 0;
+
                         txt1.setText("");
                         txt2.setText("");
+                        txt3.setText("");
                         //so the players can start over if someone fails. They just have to release the button and press it again.
-                        //txt1.setText("Place thumb on marker");
                         player1Ready = false;
-                        button1.setBackgroundResource(R.drawable.thumb_scanner);
+                        button1.setBackgroundResource(R.drawable.thumb_scanner3);
                         return true;
                 }
                 return false;
@@ -200,18 +178,18 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                     case MotionEvent.ACTION_DOWN:
                         player2Ready = true;
                         actionUp = false;
-                        button2.setBackgroundResource(R.drawable.greenthumb);
-                        if (player1Ready == true && player2Ready == true){
+                        button2.setBackgroundResource(R.drawable.greenthumb2);
+                        if (player1Ready == true && player2Ready == true && player3Ready == true){
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
-                            //middleImage.setImageResource(R.drawable.battery11);
                             txt1.setText("SHAKE!");
                             txt2.setText("SHAKE!");
+                            txt3.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
                         // End
-                        SM.unregisterListener(ChargeTheBattery.this);
+                        //SM.unregisterListener(ChargeTheBattery.this);
                         if(stopHandler == false) {
                             mediaPlayer.pause();
                         }
@@ -220,16 +198,65 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                         //counter = 0;
                         txt1.setText("");
                         txt2.setText("");
+                        txt3.setText("");
                         //so the players can start over if someone fails. They just have to release the button and press it again.
                         //txt2.setText("Place thumb on marker");
                         player2Ready = false;
-                        button2.setBackgroundResource(R.drawable.thumb_scanner);
+                        button2.setBackgroundResource(R.drawable.thumb_scanner2);
                         return true;
                 }
                 return false;
             }
         });
 
+        button3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        player3Ready = true;
+                        actionUp = false;
+                        button3.setBackgroundResource(R.drawable.greenthumb);
+                        if (player1Ready == true && player2Ready == true && player3Ready == true){
+                            // Register sensor listener
+                            SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
+                            txt1.setText("SHAKE!");
+                            txt2.setText("SHAKE!");
+                            txt3.setText("SHAKE!");
+                        }
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        // End
+                        //SM.unregisterListener(ChargeTheBattery.this);
+                        if(stopHandler == false) {
+                            mediaPlayer.pause();
+                        }
+                        actionUp = true;
+                        actionUp();
+                        //counter = 0;
+                        txt1.setText("");
+                        txt2.setText("");
+                        txt3.setText("");
+                        //so the players can start over if someone fails. They just have to release the button and press it again.
+                        //txt2.setText("Place thumb on marker");
+                        player3Ready = false;
+                        button3.setBackgroundResource(R.drawable.thumb_scanner);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SM.registerListener(this, mySensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SM.unregisterListener(ChargeTheBattery.this);
     }
 
     @Override
@@ -248,6 +275,7 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     @Override
@@ -331,7 +359,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
 
                     if (counter > 0) {
                         counter--;
-                        //txt1.setText(String.valueOf(mediaPlayer.getCurrentPosition()/1000));
 
                         progressBar.setProgress(mediaPlayer.getCurrentPosition() / 1000);
 
@@ -369,7 +396,7 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
             public void run(){
                 //do something
                 imageCounter ++;
-                if(player1Ready == false || player2Ready == false) {
+                if(player1Ready == false || player2Ready == false || player3Ready == false) {
                     if (imageCounter == 1) {
                         middleImage.setImageResource(R.drawable.battery_singleplayerdown);
                     }
@@ -413,7 +440,7 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_shake_hands);
+        setContentView(R.layout.activity_charge_battery);
     }
 
     @Override
@@ -421,7 +448,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
         // your code.
         mediaPlayer.release();
         mediaPlayer = null;
-        //smAccelerometer.unregisterListener(this);
         Intent intent = new Intent(ChargeTheBattery.this, NavigationActivity.class);
         startActivity(intent);
     }
