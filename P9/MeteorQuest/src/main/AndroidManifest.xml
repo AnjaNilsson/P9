@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.anja.meteorquest">
 
-    <uses-permission android:name="android.permission.NFC" />
+    <dist:module dist:instant="true" />
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,8 +17,6 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.flash" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <meta-data
         android:name="com.google.android.gms.version"
@@ -29,8 +31,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Minigames.BalanceGame"></activity>
+        <activity android:name=".Minigames.RightTilt" />
+        <activity android:name=".Minigames.LeftTilt" />
+        <activity android:name=".Minigames.TiltStart" />
         <activity
-            android:name="com.example.anja.meteorquest.PlayerRole"
+            android:name=".Minigames.MazeGame"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".PlayerRole"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,49 +48,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.anja.meteorquest.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name="com.example.anja.meteorquest.Other.GeofenceTransitionService" />
-        <service android:name="com.example.anja.meteorquest.Other.Accelerometer" />
-        <service android:name="com.example.anja.meteorquest.NavigationMethod.Flashlight" />
+        <service android:name=".Other.GeofenceTransitionService" />
+        <service android:name=".Other.Accelerometer" />
+        <service android:name=".NavigationMethod.Flashlight" />
 
         <activity
-            android:name="com.example.anja.meteorquest.Minigames.ChargeTheBattery"
+            android:name=".Minigames.ChargeTheBattery"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.anja.meteorquest.Other.Countdown"
+            android:name=".Minigames.MeteorQuest"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.anja.meteorquest.Other.NFC"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/vnd.com.example.android.beam" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.anja.meteorquest.Minigames.MeteorQuest"
+            android:name=".Other.GameScreen"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.anja.meteorquest.Other.GameScreen"
-            android:screenOrientation="portrait" />
-        <activity android:name="com.example.anja.meteorquest.Other.Victory" />
-        <activity android:name="com.example.anja.meteorquest.NavigationMethod.NavigationActivity" />
+        <activity android:name=".Other.Victory" />
+        <activity android:name=".NavigationMethod.NavigationActivity" />
 
         <service
-            android:name="com.example.anja.meteorquest.NavigationMethod.UserLocation"
+            android:name=".NavigationMethod.UserLocation"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.example.anja.meteorquest.Other.GameIntro" />
-        <activity android:name="com.example.anja.meteorquest.Minigames.PuzzleQuest" />
-        <activity android:name="com.example.anja.meteorquest.Other.Introduction" />
-        <activity android:name="com.example.anja.meteorquest.Other.Ready2StartGame" />
-        <activity android:name="com.example.anja.meteorquest.Other.GameCompleted"></activity>
+        <activity android:name=".Other.GameIntro" />
+        <activity android:name=".Minigames.PuzzleQuest" />
+        <activity android:name=".Other.Introduction" />
+        <activity android:name=".Other.Ready2StartGame" />
+        <activity android:name=".Other.GameCompleted" />
     </application>
 
 </manifest>

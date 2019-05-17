@@ -1,1 +1,1 @@
-include ':MeteorQuest'
+include ':MeteorQuest', ':dynamic_feature', ':dynamic_feature2'

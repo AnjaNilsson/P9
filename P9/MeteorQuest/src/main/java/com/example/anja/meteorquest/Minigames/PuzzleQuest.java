@@ -76,7 +76,7 @@ public class PuzzleQuest extends AppCompatActivity implements SensorEventListene
         //Firebase.setAndroidContext(this);
         //database = FirebaseDatabase.getInstance();
         rootReference = Database.getDatabaseRootReference();
-        DatabaseReference soundPuzzleReference = rootReference.child("soundpuzzle");
+        DatabaseReference soundPuzzleReference = rootReference.child("sound_puzzle");
         soundPuzzleReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

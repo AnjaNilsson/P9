@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.example.anja.meteorquest.Minigames.ChargeTheBattery;
 import com.example.anja.meteorquest.Minigames.PuzzleQuest;
 import com.example.anja.meteorquest.Minigames.MeteorQuest;
+import com.example.anja.meteorquest.Minigames.TiltStart;
+import com.example.anja.meteorquest.Minigames.MazeGame;
+import com.example.anja.meteorquest.Minigames.BalanceGame;
 import com.example.anja.meteorquest.NavigationMethod.Navigation;
 import com.example.anja.meteorquest.NavigationMethod.NavigationActivity;
 import com.example.anja.meteorquest.R;
@@ -24,6 +28,7 @@ public class Ready2StartGame extends AppCompatActivity {
     TextView nameTop;
     TextView nameBottom;
     Button startGame;
+    ImageView instructions;
     public FirebaseDatabase database;
     public DatabaseReference rootReference;
 
@@ -36,6 +41,7 @@ public class Ready2StartGame extends AppCompatActivity {
         nameTop = (TextView) findViewById(R.id.nameTop);
         nameBottom = (TextView) findViewById(R.id.nameBottom);
         startGame = (Button) findViewById(R.id.startGame);
+        instructions = (ImageView) findViewById(R.id.instructions);
 
         rootReference = Database.getDatabaseRootReference();
         DatabaseReference gamesReference = rootReference.child("skipintroduction");
@@ -51,17 +57,34 @@ public class Ready2StartGame extends AppCompatActivity {
                         String key = ds.getKey().toString();
                         if (key.equals("minigame1")) {
                             Navigation.gameRunning = true;
-                            Intent intent = new Intent(Ready2StartGame.this, PuzzleQuest.class);
+                            Intent intent = new Intent(Ready2StartGame.this, TiltStart.class);
                             startActivity(intent);
                         }
                         if (key.equals("minigame2")) {
                             Navigation.gameRunning = true;
-                            Intent intent = new Intent(Ready2StartGame.this, ChargeTheBattery.class);
-                            startActivity(intent);
+                            instructions.setImageResource(R.drawable.charge_battery);
+                            startGame.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(Ready2StartGame.this, ChargeTheBattery.class);
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
                         if (key.equals("minigame3")) {
                             Navigation.gameRunning = true;
-                            Intent intent = new Intent(Ready2StartGame.this, MeteorQuest.class);
+                            instructions.setImageResource(R.drawable.maze_instructions);
+                            startGame.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(Ready2StartGame.this, MazeGame.class);
+                                    startActivity(intent);
+                                }
+                            });
+
+                        }
+                        if (key.equals("minigame4")) {
+                            Navigation.gameRunning = true;
+                            Intent intent = new Intent(Ready2StartGame.this, BalanceGame.class);
                             startActivity(intent);
                         }
                         if (key.equals("navigation")) {

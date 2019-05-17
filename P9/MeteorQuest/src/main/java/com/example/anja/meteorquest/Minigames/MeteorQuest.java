@@ -45,7 +45,7 @@ public class MeteorQuest extends AppCompatActivity implements SensorEventListene
     String playerRole;
     ImageView background;
     MediaPlayer mediaPlayer;
-    //ArrayList<Integer> arrayImage = new ArrayList<Integer>();
+
     Integer[] arrayImagePlayer1 = new Integer[5];
     Integer[] arrayImagePlayer2 = new Integer[5];
     Integer[] arrayImagePlayer3 = new Integer[5];
@@ -155,16 +155,12 @@ public class MeteorQuest extends AppCompatActivity implements SensorEventListene
 
                         break;
                     }
-
-
-
-                }
+                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-
             }
         });
     }
@@ -370,14 +366,6 @@ public class MeteorQuest extends AppCompatActivity implements SensorEventListene
                 }
             });
         }
-    }
-
-    public void fullscreen(){
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_shuffle_game);
     }
 
     @Override

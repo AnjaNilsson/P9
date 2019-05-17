@@ -12,8 +12,9 @@ public class Minigame {
 
     public void startGame(String game, Activity activity){
 
+        //
         if(game.equals("1")) {
-            Intent intent = new Intent(activity,PuzzleQuest.class);
+            Intent intent = new Intent(activity, TiltStart.class);
             activity.startActivity(intent);
 
         }
@@ -24,7 +25,7 @@ public class Minigame {
         }
 
         if(game.equals("3")) {
-            Intent intent = new Intent(activity, MeteorQuest.class);
+            Intent intent = new Intent(activity, MazeGame.class);
             activity.startActivity(intent);
         }
 

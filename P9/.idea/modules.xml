@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MeteorQuest/MeteorQuest.iml" filepath="$PROJECT_DIR$/MeteorQuest/MeteorQuest.iml" />
       <module fileurl="file://$PROJECT_DIR$/P9.iml" filepath="$PROJECT_DIR$/P9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dynamic_feature/dynamic_feature.iml" filepath="$PROJECT_DIR$/dynamic_feature/dynamic_feature.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dynamic_feature2/dynamic_feature2.iml" filepath="$PROJECT_DIR$/dynamic_feature2/dynamic_feature2.iml" />
     </modules>
   </component>
 </project>

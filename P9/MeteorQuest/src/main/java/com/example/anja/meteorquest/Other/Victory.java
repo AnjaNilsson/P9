@@ -6,18 +6,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
+import android.media.MediaPlayer;
 import com.example.anja.meteorquest.NavigationMethod.NavigationActivity;
 import com.example.anja.meteorquest.R;
 
 public class Victory extends AppCompatActivity {
+MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_victory);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         //fullscreen();
-        setContentView(R.layout.activity_victory);
+        mediaPlayer = MediaPlayer.create(this, R.raw.tada);
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+
+        });
+
     }
 
     @Override

@@ -165,22 +165,10 @@ public class NavigationActivity extends AppCompatActivity {
 
         });
 
-        /*if(playerRole.equals("1") || playerRole.equals("4")){
-            background.setBackgroundColor(Color.BLACK);
-            text.setText("Wait for guide to call you");
-            text.setTextColor(Color.WHITE);
-        }
-
-        else{
-            text.setText("Flip the phone around to start navigation");
-        } */
-
         DatabaseReference navigationReference = rootReference.child("navigation");
         navigationReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = ds.getKey().toString();
@@ -190,7 +178,6 @@ public class NavigationActivity extends AppCompatActivity {
                         mediaPlayer.release();
                         mediaPlayer = MediaPlayer.create(NavigationActivity.this, R.raw.nav_closer);
                         mediaPlayer.start();
-
                     }
 
                     if(key.equals("wrongway") && value.equals("true")){

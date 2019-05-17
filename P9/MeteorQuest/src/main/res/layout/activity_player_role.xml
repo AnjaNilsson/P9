@@ -27,5 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="addPlayer"
+        android:background="#13847D"
+        android:textColor="@android:color/white"
         android:text="Add Player" />
 </LinearLayout>

@@ -35,13 +35,12 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
     public Sensor mySensor;
     public SensorManager SM;
 
-    ImageButton button1;
-    ImageButton button2;
-    ImageButton button3;
+    ImageButton button1, button2, button3, button4;
 
     Boolean player1Ready = false;
     Boolean player2Ready = false;
     Boolean player3Ready = false;
+    Boolean player4Ready = false;
 
     String gameState;
     int counter = 0;
@@ -119,10 +118,9 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
         button1 = (ImageButton)findViewById(R.id.button1);
         button2 = (ImageButton)findViewById(R.id.button2);
         button3 = (ImageButton)findViewById(R.id.button3);
+        button4 = (ImageButton)findViewById(R.id.button4);
         txt1 = (TextView) findViewById(R.id.txt1);
         txt2 = (TextView) findViewById(R.id.txt2);
-        txt3 = (TextView) findViewById(R.id.txt3);
-        middleImage = (ImageView) findViewById(R.id.animationDown);
         mediaPlayer = MediaPlayer.create(this, R.raw.power_up);
         // Create sensor manager
         SM = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -142,12 +140,11 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                         player1Ready = true;
                         actionUp = false;
                         button1.setBackgroundResource(R.drawable.greenthumb3);
-                        if (player1Ready == true && player2Ready == true && player3Ready == true){
+                        if (player1Ready == true && player2Ready == true && player3Ready == true && player4Ready == true){
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
                             txt1.setText("SHAKE!");
                             txt2.setText("SHAKE!");
-                            txt3.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
@@ -161,7 +158,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
 
                         txt1.setText("");
                         txt2.setText("");
-                        txt3.setText("");
                         //so the players can start over if someone fails. They just have to release the button and press it again.
                         player1Ready = false;
                         button1.setBackgroundResource(R.drawable.thumb_scanner3);
@@ -178,13 +174,12 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                     case MotionEvent.ACTION_DOWN:
                         player2Ready = true;
                         actionUp = false;
-                        button2.setBackgroundResource(R.drawable.greenthumb2);
-                        if (player1Ready == true && player2Ready == true && player3Ready == true){
+                        button2.setBackgroundResource(R.drawable.greenthumb3);
+                        if (player1Ready == true && player2Ready == true && player3Ready == true && player4Ready == true){
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
                             txt1.setText("SHAKE!");
                             txt2.setText("SHAKE!");
-                            txt3.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
@@ -198,11 +193,10 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                         //counter = 0;
                         txt1.setText("");
                         txt2.setText("");
-                        txt3.setText("");
                         //so the players can start over if someone fails. They just have to release the button and press it again.
                         //txt2.setText("Place thumb on marker");
                         player2Ready = false;
-                        button2.setBackgroundResource(R.drawable.thumb_scanner2);
+                        button2.setBackgroundResource(R.drawable.thumb_scanner3);
                         return true;
                 }
                 return false;
@@ -217,12 +211,11 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                         player3Ready = true;
                         actionUp = false;
                         button3.setBackgroundResource(R.drawable.greenthumb);
-                        if (player1Ready == true && player2Ready == true && player3Ready == true){
+                        if (player1Ready == true && player2Ready == true && player3Ready == true && player4Ready == true){
                             // Register sensor listener
                             SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
                             txt1.setText("SHAKE!");
                             txt2.setText("SHAKE!");
-                            txt3.setText("SHAKE!");
                         }
                         return true;
                     case MotionEvent.ACTION_UP:
@@ -236,7 +229,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                         //counter = 0;
                         txt1.setText("");
                         txt2.setText("");
-                        txt3.setText("");
                         //so the players can start over if someone fails. They just have to release the button and press it again.
                         //txt2.setText("Place thumb on marker");
                         player3Ready = false;
@@ -247,6 +239,41 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
             }
         });
 
+        button4.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        player4Ready = true;
+                        actionUp = false;
+                        button4.setBackgroundResource(R.drawable.greenthumb);
+                        if (player1Ready == true && player2Ready == true && player3Ready == true && player4Ready == true){
+                            // Register sensor listener
+                            SM.registerListener(ChargeTheBattery.this, mySensor, SensorManager.SENSOR_DELAY_GAME);
+                            txt1.setText("SHAKE!");
+                            txt2.setText("SHAKE!");
+                        }
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        // End
+                        //SM.unregisterListener(ChargeTheBattery.this);
+                        if(stopHandler == false) {
+                            mediaPlayer.pause();
+                        }
+                        actionUp = true;
+                        actionUp();
+                        //counter = 0;
+                        txt1.setText("");
+                        txt2.setText("");
+                        //so the players can start over if someone fails. They just have to release the button and press it again.
+                        //txt2.setText("Place thumb on marker");
+                        player4Ready = false;
+                        button4.setBackgroundResource(R.drawable.thumb_scanner);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
     @Override
     protected void onResume() {
@@ -278,35 +305,38 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
 
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
+        @Override
+        public void onSensorChanged (SensorEvent event){
 
         float yFloat = event.values[1];
         float zFloat = event.values[2];
 
-        //change zFloat back to 11
-        if(zFloat > 11 && yFloat > -5 && yFloat < 5) {
-            counter = counter + 8;
-            //play charging sound
-            if(chargingSound != true && guideTalking != true){
-                chargingSound = true;
-                //start long charging sound!!
-                mediaPlayer.start();
-                mediaPlayer.seekTo(length);
-                progressBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+            if (player1Ready == true && player2Ready == true && player3Ready == true && player4Ready == true) {
+                //change zFloat back to 11
+                if (zFloat > 11 && yFloat > -5 && yFloat < 5) {
+                    counter = counter + 8;
+                    //play charging sound
+                    if (chargingSound != true && guideTalking != true) {
+                        chargingSound = true;
+                        //start long charging sound!!
+                        mediaPlayer.start();
+                        mediaPlayer.seekTo(length);
+                        progressBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
 
+                    }
+                }
+
+                if (oldNumber > counter) {
+                    chargingSound = false;
+                    mediaPlayer.pause();
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - drainBattery);
+                    progressBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                    length = mediaPlayer.getCurrentPosition();
+                }
+                oldNumber = counter;
             }
-        }
-
-        if(oldNumber > counter){
-            chargingSound = false;
-            mediaPlayer.pause();
-            mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-drainBattery);
-            progressBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
-            length = mediaPlayer.getCurrentPosition();
-        }
-        oldNumber = counter;
     }
+
 
     public void playHelpSoundfile(String soundfile){
         length = mediaPlayer.getCurrentPosition();
@@ -417,22 +447,9 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
         Navigation.gameRunning = false;
         mediaPlayer.release();
         mediaPlayer = null;
-        mediaPlayer = MediaPlayer.create(this, R.raw.tada);
-        mediaPlayer.start();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.release();
-                mediaPlayer = null;
-                chargeBatteryDone = true;
-                Intent intent = new Intent(ChargeTheBattery.this, Victory.class);
-                startActivity(intent);
-            }
-
-        });
-
-
+        Intent intent = new Intent(ChargeTheBattery.this, Victory.class);
+        startActivity(intent);
+        chargeBatteryDone = true;
     }
 
     public void fullscreen(){
