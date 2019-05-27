@@ -1,17 +1,19 @@
 package com.example.anja.meteorquest.Minigames;
 
-import com.example.anja.meteorquest.R;
-import com.example.anja.meteorquest.Other.BallView;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.support.constraint.ConstraintLayout;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.hardware.Sensor;
@@ -20,9 +22,15 @@ import android.hardware.SensorManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.SensorEventListener;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.os.CountDownTimer;
+
+import com.example.anja.meteorquest.Other.BallView;
+import com.example.anja.meteorquest.Other.Victory;
+import com.example.anja.meteorquest.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class BalanceGame extends Activity {
 
@@ -31,23 +39,37 @@ public class BalanceGame extends Activity {
     Timer mTmr = null;
     TimerTask mTsk = null;
     int mScrWidth, mScrHeight;
+    float xRect, yRect, wRect, hRect;
     android.graphics.PointF mBallPos, mBallSpd;
-    SensorManager smanager;
-    Sensor sensor;
+    MediaPlayer mp;
+    ImageView box;
+    boolean inside;
+    TextView mTextField;
+    CountDownTimer timer;
+    boolean stateChanged;
+    String playerRole;
+    Boolean player1ready, player2ready;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
 
         requestWindowFeature(Window.FEATURE_NO_TITLE); //hide title bar
         getWindow().setFlags(0xFFFFFFFF,
                 LayoutParams.FLAG_FULLSCREEN|LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance_game);
+        mTextField = findViewById(R.id.timer);
+
+        SharedPreferences shared = getSharedPreferences("your_file_name", MODE_PRIVATE);
+        playerRole = (shared.getString("PLAYERROLE", ""));
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("https://p10project-1fc98.firebaseio.com/");
+        DatabaseReference playersReady = ref.child("PlayersReady");
+
         //create pointer to main screen
-        final RelativeLayout mainView = (android.widget.RelativeLayout) findViewById(R.id.main_view);
-//        this.smanager = (SensorManager) getSystemService(SENSOR_SERVICE);
-//        this.sensor = smanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        final ConstraintLayout balance_game = findViewById(R.id.balance_game);
 
         //get screen dimensions
         Point size = new Point();
@@ -57,19 +79,18 @@ public class BalanceGame extends Activity {
         mScrWidth = size.x;
         mScrHeight = size.y;
 
-//        String y = Integer.toString(mScrHeight);
-//        String x = Integer.toString(mScrWidth);
-//        Log.i("Width", x);
-//        Log.i("Height", y);
-//        String dimen = "Width =" + x + "Height =" + y;
-//        Toast.makeText(this, dimen, Toast.LENGTH_LONG).show();
-
         mBallPos = new android.graphics.PointF();
         mBallSpd = new android.graphics.PointF();
+
+        wRect = 100;
+        hRect = wRect; // Square
+        xRect = mScrWidth/(float)2 - wRect/(float)2;
+        yRect = mScrHeight/(float)2 - hRect/(float)2;
 
         //ball position
         mBallPos.x = mScrWidth/(float)2;
         mBallPos.y = mScrHeight/(float)2;
+
 
         //ball speed
         mBallSpd.x = 0;
@@ -77,10 +98,10 @@ public class BalanceGame extends Activity {
 
         //create initial ball
         mBallView = new BallView(this,mBallPos.x,mBallPos.y,60);
-
-        mainView.addView(mBallView); //add ball to main screen
+        balance_game.addView(mBallView); //add ball to main screen
         mBallView.invalidate(); //call onDraw in BallView
 
+        box = findViewById(R.id.rbox);
         //listener for accelerometer
         ((SensorManager)getSystemService(Context.SENSOR_SERVICE)).registerListener(
                 new SensorEventListener() {
@@ -97,7 +118,30 @@ public class BalanceGame extends Activity {
                 ((SensorManager)getSystemService(Context.SENSOR_SERVICE))
                         .getSensorList(Sensor.TYPE_ACCELEROMETER).get(0), SensorManager.SENSOR_DELAY_GAME);
 
+        stateChanged = true;
+
+        timer = new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                mTextField.setText("done!");
+                final Intent i = new Intent(BalanceGame.this, Victory.class);
+                startActivity(i);
+            }
+        };
+        while(!playerRole.equals("1") && !playerRole.equals("2"));
+        //if(playerRole.equals("1")){
+            player1ready = true;
+        //} if(playerRole.equals("2")){
+            player2ready = true;
+        //}
+
+        timer.start();
     } //OnCreate
+
 
     //listener for menu button on phone
     @Override
@@ -115,7 +159,6 @@ public class BalanceGame extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
     public void onPause()
     {
@@ -125,32 +168,63 @@ public class BalanceGame extends Activity {
         super.onPause();
     }
 
+
     @Override
     public void onResume()
     {
+        mp = MediaPlayer.create(this, R.raw.fart);
 
         //create timer to move ball to new position
         mTmr = new Timer();
         mTsk = new TimerTask() {
             public void run() {
-
+                final float distX, distY;
                 //move ball based on current speed
-                mBallPos.x += 3 * mBallSpd.x;
-                mBallPos.y += 3 * mBallSpd.y;
-
-                //if ball goes off screen, reposition to opposite side of screen
-                if (mBallPos.x > mScrWidth - 90) mBallPos.x=mScrWidth - 90;
-                if (mBallPos.y > mScrHeight - 90) mBallPos.y=mScrHeight - 90;
+                mBallPos.x += 10 * mBallSpd.x;
+                mBallPos.y += 10 * mBallSpd.y;
+                if (mBallPos.x > mScrWidth - 85) mBallPos.x=mScrWidth - 85;
+                if (mBallPos.y > mScrHeight) mBallPos.y=mScrHeight - 5;
                 if (mBallPos.x < 60) mBallPos.x=60;
                 if (mBallPos.y < 60) mBallPos.y=60;
+
+                //detect when ball goes inside or outside of the box
+                distX = Math.abs(mBallPos.x - xRect - wRect/(float)2);
+                distY = Math.abs(mBallPos.y - yRect - hRect/(float)2);
+
                 //update ball class instance
                 mBallView.x = mBallPos.x;
                 mBallView.y = mBallPos.y;
+
+
                 //redraw ball.
-//                RedrawHandler.post(new Runnable() {
-//                    public void run() {
-//                        mBallView.invalidate();
-//                    }});
+                RedrawHandler.post(new Runnable() {
+                    public void run() {
+                        mBallView.invalidate();
+
+                        if(distX > (wRect/(float)2) + 80) {
+                            inside = false;
+                        } else if(distY > (hRect/(float)2) + 80){
+                            inside = false;
+                        } else{
+                            inside = true;
+                        }
+                            if(inside){
+
+                            box.setBackgroundResource(R.drawable.rectangle);
+                            if(!stateChanged && player1ready && player2ready){
+                                timer.start();
+                                stateChanged = true;
+                            }
+                        }
+
+                            if(!inside){
+                                if(stateChanged){
+                                    timer.cancel();
+                                    stateChanged = false;
+                                }
+                                box.setBackgroundResource(R.drawable.redrectangle);
+                            }
+                    }});
             }};
 
         mTmr.schedule(mTsk,10,10); //start timer
@@ -175,4 +249,19 @@ public class BalanceGame extends Activity {
         super.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
+
 }
+

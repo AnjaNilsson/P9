@@ -54,7 +54,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="292dp"
-        android:onClick="startIntroduction"
         android:text="START"
         android:background="#13847D"
         android:textColor="@android:color/white"

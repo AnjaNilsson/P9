@@ -14,22 +14,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.anja.meteorquest.NavigationMethod.Navigation;
 import com.example.anja.meteorquest.NavigationMethod.NavigationActivity;
-import com.example.anja.meteorquest.Other.Database;
 import com.example.anja.meteorquest.Other.Victory;
 import com.example.anja.meteorquest.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class ChargeTheBattery extends AppCompatActivity implements SensorEventListener {
     public Sensor mySensor;
@@ -70,67 +64,22 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_charge_battery);
 
-        rootReference = Database.getDatabaseRootReference();
-        DatabaseReference chargethebatteryReference = rootReference.child("chargethebattery");
-        chargethebatteryReference.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String key = ds.getKey().toString();
-                    String value = ds.getValue().toString();
-                    if(key.equals("soundfile1") && value.equals("true")){
-                        //String key = ds.getKey().toString();
-                        playHelpSoundfile(key);
-                        break;
-                    }
-                    if(key.equals("soundfile2") && value.equals("true")){
-                        //play soundfile1
-                        playHelpSoundfile(key);
-                        break;
-
-                    }
-                    if(key.equals("soundfile3") && value.equals("true")){
-                        //play soundfile1
-                        playHelpSoundfile(key);
-                        break;
-
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-
-            }
-        });
-
-
-        progressBar = (ProgressBar)findViewById(R.id.progress);
+        progressBar = findViewById(R.id.progress);
 
         CharSequence colors[] = new CharSequence[] {"1", "2"};
 
-        button1 = (ImageButton)findViewById(R.id.button1);
-        button2 = (ImageButton)findViewById(R.id.button2);
-        button3 = (ImageButton)findViewById(R.id.button3);
-        button4 = (ImageButton)findViewById(R.id.button4);
-        txt1 = (TextView) findViewById(R.id.txt1);
-        txt2 = (TextView) findViewById(R.id.txt2);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
+        txt1 = findViewById(R.id.txt1);
+        txt2 = findViewById(R.id.txt2);
         mediaPlayer = MediaPlayer.create(this, R.raw.power_up);
         // Create sensor manager
         SM = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-        // MiniGameDrink sensor
         mySensor = SM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        //changeImage();
         drainBattery();
-        //changeThumbImg();
 
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -265,8 +214,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
                         //counter = 0;
                         txt1.setText("");
                         txt2.setText("");
-                        //so the players can start over if someone fails. They just have to release the button and press it again.
-                        //txt2.setText("Place thumb on marker");
                         player4Ready = false;
                         button4.setBackgroundResource(R.drawable.thumb_scanner);
                         return true;
@@ -421,25 +368,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
 
     }
 
-    public void changeImage(){
-        handler.postDelayed(new Runnable(){
-            public void run(){
-                //do something
-                imageCounter ++;
-                if(player1Ready == false || player2Ready == false || player3Ready == false) {
-                    if (imageCounter == 1) {
-                        middleImage.setImageResource(R.drawable.battery_singleplayerdown);
-                    }
-                    if (imageCounter == 2) {
-                        middleImage.setImageResource(R.drawable.battery_singleplayerup);
-                        imageCounter = 0;
-                    }
-                }
-
-                handler.postDelayed(this, delay);
-            }
-        }, delay);
-    }
 
     public void victory(){
         SM.unregisterListener(ChargeTheBattery.this);
@@ -452,13 +380,6 @@ public class ChargeTheBattery extends AppCompatActivity implements SensorEventLi
         chargeBatteryDone = true;
     }
 
-    public void fullscreen(){
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_charge_battery);
-    }
 
     @Override
     public void onBackPressed() {

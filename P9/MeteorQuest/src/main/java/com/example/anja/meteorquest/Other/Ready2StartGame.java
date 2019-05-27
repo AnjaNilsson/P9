@@ -38,10 +38,10 @@ public class Ready2StartGame extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_ready2_start_game);
 
-        nameTop = (TextView) findViewById(R.id.nameTop);
-        nameBottom = (TextView) findViewById(R.id.nameBottom);
-        startGame = (Button) findViewById(R.id.startGame);
-        instructions = (ImageView) findViewById(R.id.instructions);
+        nameTop = findViewById(R.id.nameTop);
+        nameBottom = findViewById(R.id.nameBottom);
+        startGame = findViewById(R.id.startGame);
+        instructions = findViewById(R.id.instructions);
 
         rootReference = Database.getDatabaseRootReference();
         DatabaseReference gamesReference = rootReference.child("skipintroduction");
@@ -84,8 +84,16 @@ public class Ready2StartGame extends AppCompatActivity {
                         }
                         if (key.equals("minigame4")) {
                             Navigation.gameRunning = true;
+                            //instructions.setImageResource(R.drawable.);
                             Intent intent = new Intent(Ready2StartGame.this, BalanceGame.class);
                             startActivity(intent);
+//                            startGame.setOnClickListener(new View.OnClickListener() {
+//                                public void onClick(View v) {
+//                                    Intent intent = new Intent(Ready2StartGame.this, BalanceGame.class);
+//                                    startActivity(intent);
+//                                }
+//                            });
+
                         }
                         if (key.equals("navigation")) {
                             Intent intent = new Intent(Ready2StartGame.this, NavigationActivity.class);

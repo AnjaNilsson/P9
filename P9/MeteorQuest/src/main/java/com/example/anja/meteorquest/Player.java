@@ -2,8 +2,6 @@ package com.example.anja.meteorquest;
 
 public class Player {
 
-    private String username;
-    private String password;
     public String playerRole;
     public double latitude;
     public double longitude;

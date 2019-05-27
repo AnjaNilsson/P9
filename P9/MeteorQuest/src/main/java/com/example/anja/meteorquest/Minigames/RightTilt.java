@@ -35,7 +35,7 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         this.smanager = (SensorManager)getSystemService(SENSOR_SERVICE);
         this.sensor = smanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        image = (ImageView) findViewById(R.id.img);
+        image = findViewById(R.id.img);
 
 
     }
@@ -90,18 +90,6 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
             startActivity(i);
         }
 
-        //If it's rotated to the right at -90 degrees
-//        if(x<=-8)
-//        {
-//            image.setImageResource(rightImage[counter]);
-//            if (currentState == prevState){
-//                currentState++;
-//            } else if(counter>26) {
-//                //end game
-//                Intent intent = new Intent(RightTilt.this, Victory.class);
-//                startActivity(intent);
-//            }
-//        }
         if (z >= 7){
             image.setImageResource(R.drawable.rightside_nope);
             if (counter < 27 && (currentState != prevState))

@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity
     public Sensor accelerometer;
     public SensorManager smAccelerometer;
     Boolean screenDown = false;
+    boolean tak;
     Boolean screenUp = true;
     String cameraId;
     CameraManager camManager;
