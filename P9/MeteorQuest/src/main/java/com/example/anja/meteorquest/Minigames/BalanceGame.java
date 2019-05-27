@@ -1,5 +1,7 @@
 package com.example.anja.meteorquest.Minigames;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.app.Activity;
@@ -9,6 +11,7 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.view.Display;
 import android.view.Menu;
@@ -28,9 +31,13 @@ import android.os.CountDownTimer;
 
 import com.example.anja.meteorquest.Other.BallView;
 import com.example.anja.meteorquest.Other.Victory;
+import com.example.anja.meteorquest.PlayerRole;
 import com.example.anja.meteorquest.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class BalanceGame extends Activity {
 
@@ -61,12 +68,8 @@ public class BalanceGame extends Activity {
         setContentView(R.layout.activity_balance_game);
         mTextField = findViewById(R.id.timer);
 
-        SharedPreferences shared = getSharedPreferences("your_file_name", MODE_PRIVATE);
-        playerRole = (shared.getString("PLAYERROLE", ""));
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("https://p10project-1fc98.firebaseio.com/");
-        DatabaseReference playersReady = ref.child("PlayersReady");
+//        SharedPreferences shared = getSharedPreferences("your_file_name", MODE_PRIVATE);
+//        playerRole = (shared.getString("PLAYERROLE", ""));
 
         //create pointer to main screen
         final ConstraintLayout balance_game = findViewById(R.id.balance_game);
@@ -132,13 +135,43 @@ public class BalanceGame extends Activity {
                 startActivity(i);
             }
         };
-        while(!playerRole.equals("1") && !playerRole.equals("2"));
-        //if(playerRole.equals("1")){
-            player1ready = true;
-        //} if(playerRole.equals("2")){
-            player2ready = true;
-        //}
 
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference("https://p10project-1fc98.firebaseio.com/");
+//        DatabaseReference playersReady = ref.child("PlayersReady");
+//
+//        if(playerRole.equals("1")){
+//            playersReady.child("player1ready").setValue("true");
+//        }
+//        if(playerRole.equals("2")){
+//            playersReady.child("player2ready").setValue("true");
+//
+//        }
+//
+//        playersReady.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot ds : dataSnapshot.getChildren()){
+//                    String value = ds.getValue().toString();
+//                    if(value.equals("true")){
+//                        String key = ds.getKey().toString();
+//                        if(key.equals("player1ready") && key.equals("player2ready")){
+//                            player1ready = true;
+//                            player2ready = true;
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+//        if(player1ready && player2ready){
+//            timer.start();
+//        }
         timer.start();
     } //OnCreate
 
@@ -209,14 +242,12 @@ public class BalanceGame extends Activity {
                             inside = true;
                         }
                             if(inside){
-
-                            box.setBackgroundResource(R.drawable.rectangle);
-                            if(!stateChanged && player1ready && player2ready){
+                                box.setBackgroundResource(R.drawable.rectangle);
+                            if(!stateChanged){
                                 timer.start();
                                 stateChanged = true;
                             }
                         }
-
                             if(!inside){
                                 if(stateChanged){
                                     timer.cancel();
