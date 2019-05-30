@@ -90,21 +90,21 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
             startActivity(i);
         }
 
-        if (z >= 7){
+        if (z >= 8){
             image.setImageResource(R.drawable.rightside_nope);
             if (counter < 27 && (currentState != prevState))
             {
                 counter++;
                 prevState++;
             }
-        } else if (z <= -7){
+        } else if (z <= -8){
             image.setImageResource(R.drawable.rightside_yes);
             if (counter < 27 && (currentState != prevState))
             {
                 counter++;
                 prevState++;
             }
-        }else{
+        }else if(x<-6){
             image.setImageResource(rightImage[counter]);
             if (currentState == prevState){
                 currentState++;

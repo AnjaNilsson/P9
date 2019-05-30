@@ -1,17 +1,13 @@
 package com.example.anja.meteorquest.Minigames;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.view.Display;
 import android.view.Menu;
@@ -31,13 +27,7 @@ import android.os.CountDownTimer;
 
 import com.example.anja.meteorquest.Other.BallView;
 import com.example.anja.meteorquest.Other.Victory;
-import com.example.anja.meteorquest.PlayerRole;
 import com.example.anja.meteorquest.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class BalanceGame extends Activity {
 
@@ -144,7 +134,7 @@ public class BalanceGame extends Activity {
 //            playersReady.child("player1ready").setValue("true");
 //        }
 //        if(playerRole.equals("2")){
-//            playersReady.child("player2ready").setValue("true");
+//         if inside && player 2 =   playersReady.child("player2ready").setValue("true");
 //
 //        }
 //

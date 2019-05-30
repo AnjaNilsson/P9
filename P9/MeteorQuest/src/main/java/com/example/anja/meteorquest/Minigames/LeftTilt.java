@@ -30,6 +30,7 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
     int counter = 0, currentState = 1, prevState = 0; //counter and state machine
     MediaPlayer mp;
     SoundPool sp;
+    boolean played;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,8 +40,7 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         this.smanager = (SensorManager)getSystemService(SENSOR_SERVICE);
         this.sensor = smanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        image = (ImageView) findViewById(R.id.img);
-
+        image = findViewById(R.id.img);
 
     }
 
@@ -87,12 +87,6 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
         leftImage[27] = R.drawable.left_done;
 
         final MediaPlayer mp = MediaPlayer.create(this, R.raw.shuffle);
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-            public void onCompletion(MediaPlayer mp){
-                mp.release();
-                mp = null;
-            }
-        });
 
 
         //if back to portrait
@@ -102,17 +96,6 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
             startActivity(i);
         }
 
-        // If device rotated to the left at 90 degrees
-//        if(x>= 8) {
-//            image.setImageResource(leftImage[counter]);
-//            if (currentState == prevState){
-//                currentState++;
-//            } else if(counter>26) {
-//                //end game
-//                Intent intent = new Intent(LeftTilt.this, Victory.class);
-//                startActivity(intent);
-//            }
-//        }
         if (z >= 8) {
             image.setImageResource(R.drawable.android_nope);
             mp.start();
@@ -125,19 +108,28 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
 
         } else if (z <= -8) {
             image.setImageResource(R.drawable.android_yes);
-            mp.start();
+            if(!played){
+                mp.start();
+                played = true;
+            }
 
             if (counter < 27 && (currentState != prevState))
             {
                 counter++;
                 prevState++;
             }
-        } else{
+        } else if(x>8) {
             image.setImageResource(leftImage[counter]);
+            played=false;
             if (currentState == prevState){
                 currentState++;
             } else if(counter>=27) {
                 //end game
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    public void onCompletion(MediaPlayer mp){
+                        mp.release();
+                    }
+                });
                 Intent intent = new Intent(LeftTilt.this, Victory.class);
                 startActivity(intent);
             }

@@ -24,10 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import android.widget.EditText;
-import android.app.Activity;
-import android.view.inputmethod.InputMethodManager;
 import android.view.WindowManager;
 import android.text.TextWatcher;
 
@@ -86,17 +83,18 @@ public class MazeGame extends AppCompatActivity implements SensorEventListener{
         txt.setVisibility(View.INVISIBLE);
 
         enter2.setOnClickListener(new Button.OnClickListener() {
-            EditText input = (EditText) findViewById(R.id.input);
-            String value = input.getText().toString();
+            EditText input = findViewById(R.id.input);
+            int value = input.getInputType();
+           //int value = Integer.parseInt(input.getText().toString());
             public void onClick(View v) {
-                Intent intent = new Intent(MazeGame.this, Victory.class);
-                startActivity(intent);
-//                if (value == "2") {
-//                    Intent intent = new Intent(MazeGame.this, Victory.class);
-//                    startActivity(intent);
-//                } else if(value != "2"){
-//                    Toast.makeText(MazeGame.this, "Incorrect try again", Toast.LENGTH_LONG).show();
-//                }
+//                Intent intent = new Intent(MazeGame.this, Victory.class);
+//                startActivity(intent);
+                if(value == 2) {
+                    Intent intent = new Intent(MazeGame.this, Victory.class);
+                    startActivity(intent);
+                } else{
+                    Toast.makeText(MazeGame.this, "Incorrect try again", Toast.LENGTH_LONG).show();
+                }
             }
 
         });
