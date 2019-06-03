@@ -33,7 +33,6 @@ public class TiltStart extends AppCompatActivity implements SensorEventListener 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         txt = (TextView) findViewById(R.id.txt);
-        image = (ImageView) findViewById(R.id.img);
 
         this.smanager = (SensorManager) getSystemService(SENSOR_SERVICE);
         this.sensor = smanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -81,6 +80,19 @@ public class TiltStart extends AppCompatActivity implements SensorEventListener 
     {
         super.onPause();
         smanager.unregisterListener(this);
+    }
+
+    @Override
+    public void onDestroy() //main thread stopped
+    {
+        super.onDestroy();
+        android.os.Process.killProcess(android.os.Process.myPid());  //remove app from memory
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override

@@ -10,9 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c36b0fa8-2fcd-438f-bb72-71b595ea17b1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/P9.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/P9.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/drawable/leftside_done.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/drawable/rightside_done.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P9/MeteorQuest/src/main/java/com/example/anja/meteorquest/Minigames/BalanceGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/java/com/example/anja/meteorquest/Minigames/BalanceGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P9/MeteorQuest/src/main/java/com/example/anja/meteorquest/Minigames/LeftTilt.java" beforeDir="false" afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/java/com/example/anja/meteorquest/Minigames/LeftTilt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P9/MeteorQuest/src/main/java/com/example/anja/meteorquest/Minigames/RightTilt.java" beforeDir="false" afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/java/com/example/anja/meteorquest/Minigames/RightTilt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/drawable/first_instructions.png" beforeDir="false" afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/drawable/first_instructions.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/layout/activity_balance_game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/layout/activity_balance_game.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/layout/activity_tilt_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/P9/MeteorQuest/src/main/res/layout/activity_tilt_start.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,10 +33,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="3832" />
-    <option name="y" value="144" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-15" />
+    <option name="y" value="-15" />
+    <option name="width" value="3873" />
+    <option name="height" value="2093" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -49,7 +54,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -61,6 +65,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -118,9 +123,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3832" y="144" width="1936" height="1056" extended-state="6" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16364606" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16297787" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Captures" order="3" side_tool="true" weight="0.25" />

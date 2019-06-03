@@ -3,18 +3,16 @@ package com.example.anja.meteorquest.Minigames;
 //package com.example.maria.introgame;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.hardware.SensorManager;
 import android.hardware.SensorEventListener;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.ImageView;
-import android.widget.ImageSwitcher;
 
 import com.example.anja.meteorquest.Other.Victory;
 import com.example.anja.meteorquest.R;
@@ -26,6 +24,7 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
     private ImageView image;
     Integer[] rightImage = new Integer[28];
     int counter = 0, currentState = 1, prevState = 0; //counter and state machine
+    boolean played;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -80,8 +79,14 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
         rightImage[24] = R.drawable.rightside_q24;
         rightImage[25] = R.drawable.rightside_q25;
         rightImage[26] = R.drawable.rightside_q26;
-        rightImage[27] = R.drawable.right_done;
+        rightImage[27] = R.drawable.rightside_done;
 
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.fart);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            public void onCompletion(MediaPlayer mp){
+                mp.release();
+            }
+        });
 
         //if back to portrait
         if(y>= 6)
@@ -92,13 +97,23 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
 
         if (z >= 8){
             image.setImageResource(R.drawable.rightside_nope);
+//            if(!played){
+//                mp.start();
+//                played = true;
+//            }
+
             if (counter < 27 && (currentState != prevState))
             {
+
                 counter++;
                 prevState++;
             }
         } else if (z <= -8){
             image.setImageResource(R.drawable.rightside_yes);
+//            if(!played){
+//                mp.start();
+//                played = true;
+//            }
             if (counter < 27 && (currentState != prevState))
             {
                 counter++;
@@ -106,6 +121,7 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
             }
         }else if(x<-6){
             image.setImageResource(rightImage[counter]);
+            played=false;
             if (currentState == prevState){
                 currentState++;
             } else if(counter>=27) {
@@ -129,6 +145,19 @@ public class RightTilt extends AppCompatActivity implements SensorEventListener{
     {
         super.onPause();
         smanager.unregisterListener(this);
+    }
+
+    @Override
+    public void onDestroy() //main thread stopped
+    {
+        super.onDestroy();
+        android.os.Process.killProcess(android.os.Process.myPid());  //remove app from memory
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override

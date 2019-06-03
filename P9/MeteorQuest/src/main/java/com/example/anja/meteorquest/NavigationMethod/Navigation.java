@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.PowerManager;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.anja.meteorquest.Event;
 import com.example.anja.meteorquest.Player;
@@ -40,7 +41,7 @@ public class Navigation implements SensorEventListener {
     public static boolean screenDown = false;
     public static Context context;
     public static Activity activity;
-    public ScreenBrightness screenBrightness;
+    //public ScreenBrightness screenBrightness;
     public static boolean gameRunning = false;
     public static boolean minigame1Done = false;
     public static boolean minigame2Done = false;
@@ -48,6 +49,7 @@ public class Navigation implements SensorEventListener {
     public static float distance;
     public float oldDistance;
     public ConstraintLayout background;
+    TextView text;
     MediaPlayer mediaPlayer;
     String file = "";
 
@@ -59,7 +61,8 @@ public class Navigation implements SensorEventListener {
     public void activateAccelerometer(Context context, Activity activity){
         this.context = context;
         this.activity = activity;
-        background = (ConstraintLayout)activity.findViewById(R.id.backgroundActivity);
+        background = activity.findViewById(R.id.backgroundActivity);
+        text = activity.findViewById(R.id.text);
 
         smAccelerometer = (SensorManager) context.getSystemService(SENSOR_SERVICE);
         accelerometer = smAccelerometer.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -68,7 +71,7 @@ public class Navigation implements SensorEventListener {
             smAccelerometer.registerListener((SensorEventListener) this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
 
-        screenBrightness = new ScreenBrightness(activity);
+        //screenBrightness = new ScreenBrightness(activity);
     }
 
     @Override
@@ -102,12 +105,10 @@ public class Navigation implements SensorEventListener {
 
 
                                 } else if (gz < 0) {
-                                    //Toast toast = Toast.makeText(context, "Down", Toast.LENGTH_SHORT);
-                                    //toast.show();
 
                                     screenDown = true;
                                     background.setBackgroundColor(Color.WHITE);
-                                    screenBrightness.adjustBrightness(distance);
+                                    //screenBrightness.adjustBrightness(distance);
                                 }
                             }
                         } else {
@@ -130,7 +131,7 @@ public class Navigation implements SensorEventListener {
 
 
     public void calculateDistance(Player player, Event event, String playerRole){
-        background = (ConstraintLayout)activity.findViewById(R.id.backgroundActivity);
+        background = activity.findViewById(R.id.backgroundActivity);
 
 
         Location locationA = new Location("point A");
@@ -150,10 +151,12 @@ public class Navigation implements SensorEventListener {
         if(oldDistance != 0.0f && screenDown == true){
             if(oldDistance > distance){
                background.setBackgroundColor(Color.GREEN);
+               text.setText("Looks like the right way");
             }
 
             else{
                 background.setBackgroundColor(Color.RED);
+                text.setText("Seems like the wrong way, try turning around");
             }
 
         }

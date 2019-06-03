@@ -121,6 +121,13 @@ public class BalanceGame extends Activity {
 
             public void onFinish() {
                 mTextField.setText("done!");
+
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    public void onCompletion(MediaPlayer mp){
+                        mp.release();
+                    }
+                });
+
                 final Intent i = new Intent(BalanceGame.this, Victory.class);
                 startActivity(i);
             }
@@ -197,6 +204,7 @@ public class BalanceGame extends Activity {
     {
         mp = MediaPlayer.create(this, R.raw.fart);
 
+
         //create timer to move ball to new position
         mTmr = new Timer();
         mTsk = new TimerTask() {
@@ -239,8 +247,10 @@ public class BalanceGame extends Activity {
                             }
                         }
                             if(!inside){
+                                mp.start();
                                 if(stateChanged){
                                     timer.cancel();
+
                                     stateChanged = false;
                                 }
                                 box.setBackgroundResource(R.drawable.redrectangle);

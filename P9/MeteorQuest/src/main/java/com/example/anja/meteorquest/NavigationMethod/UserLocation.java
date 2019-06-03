@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-
 import com.example.anja.meteorquest.Event;
 import com.example.anja.meteorquest.Other.Database;
 import com.example.anja.meteorquest.Player;
@@ -165,7 +164,6 @@ public class UserLocation extends Service {
                     if(key.equals("longitude")&& !value.equals(null) && !value.equals("")){
                         event.setLongitude(Double.parseDouble(ds.getValue().toString()));
                     }
-
 
                 }
             }

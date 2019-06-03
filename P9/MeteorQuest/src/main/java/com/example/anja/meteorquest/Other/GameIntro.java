@@ -185,12 +185,17 @@ public class GameIntro extends AppCompatActivity {
             minigame1.startGame("1",this);
         }
         if(game.equals("2")){
-            Minigame minigame1 = new Minigame();
-            minigame1.startGame("2",this);
+            Minigame minigame2 = new Minigame();
+            minigame2.startGame("2",this);
         }
         if(game.equals("3")){
-            Minigame minigame1 = new Minigame();
-            minigame1.startGame("3",this);
+            Minigame minigame3 = new Minigame();
+            minigame3.startGame("3",this);
+        }
+
+        if(game.equals("4")){
+            Minigame minigame4 = new Minigame();
+            minigame4.startGame("4",this);
         }
     }
 }

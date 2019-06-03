@@ -14,18 +14,23 @@ public class Minigame {
 
         //
         if(game.equals("1")) {
-            Intent intent = new Intent(activity, TiltStart.class);
+            Intent intent = new Intent(activity, MazeGame.class);
             activity.startActivity(intent);
 
         }
 
         if(game.equals("2")) {
-            Intent intent = new Intent(activity, ChargeTheBattery.class);
+            Intent intent = new Intent(activity, BalanceGame.class);
             activity.startActivity(intent);
         }
 
         if(game.equals("3")) {
-            Intent intent = new Intent(activity, MazeGame.class);
+            Intent intent = new Intent(activity, ChargeTheBattery.class);
+            activity.startActivity(intent);
+        }
+
+        if(game.equals("4")) {
+            Intent intent = new Intent(activity, TiltStart.class);
             activity.startActivity(intent);
         }
 

@@ -1,6 +1,7 @@
 package com.example.anja.meteorquest.Minigames;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,9 +15,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.widget.ImageView;
 import android.media.MediaPlayer;
-import android.media.SoundPool.Builder;
-import android.media.AudioManager;
-import android.media.AudioAttributes;
 
 import com.example.anja.meteorquest.Other.Victory;
 import com.example.anja.meteorquest.R;
@@ -84,9 +82,14 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
         leftImage[24] = R.drawable.leftside_q24;
         leftImage[25] = R.drawable.leftside_q25;
         leftImage[26] = R.drawable.leftside_q26;
-        leftImage[27] = R.drawable.left_done;
+        leftImage[27] = R.drawable.leftside_done;
 
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.shuffle);
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.fart);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            public void onCompletion(MediaPlayer mp){
+                mp.release();
+            }
+        });
 
 
         //if back to portrait
@@ -98,7 +101,10 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
 
         if (z >= 8) {
             image.setImageResource(R.drawable.android_nope);
-            mp.start();
+//            if(!played){
+//                mp.start();
+//                played = true;
+//            }
 
             if (counter < 27 && (currentState != prevState))
             {
@@ -108,28 +114,24 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
 
         } else if (z <= -8) {
             image.setImageResource(R.drawable.android_yes);
-            if(!played){
-                mp.start();
-                played = true;
-            }
+//            if(!played){
+//                mp.start();
+//               played = true;
+//           }
 
             if (counter < 27 && (currentState != prevState))
             {
                 counter++;
                 prevState++;
             }
-        } else if(x>8) {
+        } else if(x>6) {
             image.setImageResource(leftImage[counter]);
             played=false;
             if (currentState == prevState){
                 currentState++;
             } else if(counter>=27) {
                 //end game
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
-                    public void onCompletion(MediaPlayer mp){
-                        mp.release();
-                    }
-                });
+
                 Intent intent = new Intent(LeftTilt.this, Victory.class);
                 startActivity(intent);
             }
@@ -150,6 +152,19 @@ public class LeftTilt extends AppCompatActivity implements SensorEventListener{
     {
         super.onPause();
         smanager.unregisterListener(this);
+    }
+
+    @Override
+    public void onDestroy() //main thread stopped
+    {
+        super.onDestroy();
+        android.os.Process.killProcess(android.os.Process.myPid());  //remove app from memory
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override

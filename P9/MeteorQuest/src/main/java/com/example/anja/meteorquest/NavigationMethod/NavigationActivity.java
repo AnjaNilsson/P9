@@ -81,31 +81,6 @@ public class NavigationActivity extends AppCompatActivity {
         SharedPreferences shared = getSharedPreferences("your_file_name", MODE_PRIVATE);
         playerRole = (shared.getString("PLAYERROLE", ""));
 
-        /*if(ChargeTheBattery.chargeBatteryDone == true){
-            if (playerRole.equals("1") && playerRoleChanged == false) {
-                playerRoleChanged = true;
-                playerRole = "2";
-            }
-            if (playerRole.equals("4") && playerRoleChanged == false) {
-                playerRoleChanged = true;
-                playerRole = "3";
-            }
-            if (playerRole.equals("2") && playerRoleChanged == false) {
-                playerRoleChanged = true;
-                playerRole = "1";
-            }
-            if (playerRole.equals("3") && playerRoleChanged == false) {
-                playerRoleChanged = true;
-                playerRole = "4";
-            }
-
-
-            SharedPreferences prefs = getSharedPreferences("your_file_name", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("PLAYERROLE", playerRole);
-            editor.commit();
-        } */
-
         background = (ConstraintLayout) findViewById(R.id.backgroundActivity);
         text = (TextView) findViewById(R.id.text);
 
@@ -244,7 +219,7 @@ public class NavigationActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    public boolean checkLocationPermission() {
+    public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
